@@ -53,11 +53,11 @@ export class UsersController {
   // FOR ML TESTS
   @Get('ml-get-all')
   mlGetAll(): any {
-    this.userService.mlGetAll();
+    return this.userService.mlGetAll();
   }
 
   @Get('ml-get-by-id/:id')
   mlGetById(@Param('id') id: string): any {
-    this.userService.mlGetById(id);
+    return this.userService.mlGetById(id);
   }
 }
