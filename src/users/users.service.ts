@@ -172,6 +172,14 @@ export class UsersService {
         isCompanyOwner: true, // есть компания?
         companyINN: '52151295912959', // ИНН компании
       },
+      hackathon: { // хакатоны и цифровые конкурсы / и тд
+        countHackathons: 10, // опыт участия в хаках, кол-во
+        additional: { // резюме, портфолио, гитхаю и тд
+          github: '',
+          linkedin: '',
+          cv: '', // резюме
+        }
+      },
     }
   ];
 

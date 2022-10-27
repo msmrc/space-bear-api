@@ -15,14 +15,62 @@ export class ProjectsService {
 			type: 'hackathon', // Выбирается на фронте из списка (Академия инноваторов, Хакатоны и цифровые конкурсы и тд) 
 			projectName: '', // название
 			projectDescription: '', // описание
+			// Для всех проектов
+			isPublished: true, // опубликован (доступен всем пользователям)
+			projectTags: ['social', 'modern ui',], // теги проекта
+			projectOwnerId: '1', // основатель проекта
+			existTeam: [{ userId: '1', category: 'Teamlead', skills: ['Excel'] }],
+			lookingForTeam: [{ category: 'Frontend', skills: ['Angular'] }],
 
-			innovator: {
+			innovator: { // академия инноваторов
 				projectLink: '', // ссылка на проект, если есть
 				presentationFileId: '', // id на файл с презентацией
 				supportExperience: ['accelerator', 'grants'], // опыт в мерах поддержки (гранты, инкубаторы и тд)
 			},
-			existTeam: [{ userId: '1' }],
-			lookingForTeam: [{ category: 'Frontend', skills: ['Angular'] }],
+			hackathon: { // хакатоны и цифровые конкурсы / и тд
+				targetTask: { id: '1' }, // задача для участия
+			},
+			novatorOfMoscow: { // новатор Москвы
+				inn: '', // ИНН Заявителя
+				registration: '', // Адрес места жительства Заявителя (Прописка)
+				supportExperience: [''], // Опыт участия в программах гос. поддержки (к примеру, гранты фонда содействия инноваций) 
+				nomination: 'Проект будущего', // номинация, выбирается на сайте
+				direction: 'Экология и охрана', // направление, выбирается на сайте
+				revenue: '', // выручка, если есть
+				projectReadinessStage: 'mvp', // стадия готовности проекта, выбирается на сайте
+				projectLink: '', // ссылка на проект, если есть
+				presentationFileId: '', // презентация
+				businessPlanFileId: '', // бизнес план
+				copyOfSecurityDocFileId: '', // копии охранных документов
+				confirmationOfProjectProgress: ['', ''], // подтверждение развития проекта, ссылки на публикации, исследования и тд
+				additional: {
+					proofs: [ // подтверждение работоспособности 
+						{
+							fileId: '', // фото или видео	
+						}
+					],
+					characteristics: [  // характеристики
+						{
+							key: '', // ключ, вводится на сайте
+							value: '', // значение, вводится на сайте
+						}
+					]
+
+				}
+			},
+
+			// Социальные элементы
+			views: 10, // просмотры
+			rate: [ // рейтинг
+				{ userId: '1', count: 10 },
+				{ userId: '2', count: -10 },
+			],
+			comments: [ // комментарии
+				{
+					userId: '1',
+					comment: 'Невероятно!'
+				}
+			]
 		}
 	];
 
