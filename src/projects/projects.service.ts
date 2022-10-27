@@ -13,8 +13,8 @@ export class ProjectsService {
 		{
 			_id: '1',
 			type: 'hackathon', // Выбирается на фронте из списка (Академия инноваторов, Хакатоны и цифровые конкурсы и тд) 
-			projectName: '', // название
-			projectDescription: '', // описание
+			projectName: 'Star Bear', // название
+			projectDescription: 'Проект для поиска единомышленников и обмена идеями', // описание
 			// Для всех проектов
 			isPublished: true, // опубликован (доступен всем пользователям)
 			projectTags: ['social', 'modern ui',], // теги проекта
