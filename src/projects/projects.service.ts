@@ -21,6 +21,13 @@ export class ProjectsService {
 			projectOwnerId: '1', // основатель проекта
 			existTeam: [{ userId: '1', category: 'Teamlead', skills: ['Excel'] }],
 			lookingForTeam: [{ category: 'Frontend', skills: ['Angular'] }],
+			projectCostByAdmin: [{
+				rate: '', // хорошо / плохо
+				solution: '', // готово к продвижению / нужны доработки
+				publishDate: '', // 
+			}
+			],
+			isInnovated: false, // идея инновационная? да / нет
 
 			innovator: { // академия инноваторов
 				projectLink: '', // ссылка на проект, если есть

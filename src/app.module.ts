@@ -8,6 +8,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { UserFormsModule } from './user-forms/user-forms.module';
+import { ProjectsModule } from './projects/projects.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { UserFormsModule } from './user-forms/user-forms.module';
     AuthModule,
     UsersModule,
     UserFormsModule,
+    ProjectsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -160,7 +160,7 @@ export class UsersService {
         jobExperience: '20', // опыт работы (лет)
         achievements: ['Победа в хакатоне 2021', 'Победа в хакатоне 2006', 'Работал в СБЕР'], // достижения / проф. опыт
       },
-      skillInformation: { // информация по скиллам
+      skillInformation: { // информация по скиллам*********
         categories: ['Капитан', 'Teamlead', 'Backend'], // категории (Роль в команде) (Frontend, Manager, Backend и тд)
         skills: ['Excel', 'C#', '.net', 'Презентация', 'C++'], // умения (Python, c#, javascript, excel и тд)
       },
@@ -173,13 +173,15 @@ export class UsersService {
         companyINN: '52151295912959', // ИНН компании
       },
       hackathon: { // хакатоны и цифровые конкурсы / и тд
-        countHackathons: 10, // опыт участия в хаках, кол-во
+        countHackathons: '10', // опыт участия в хаках, кол-во
         additional: { // резюме, портфолио, гитхаю и тд
           github: '',
           linkedin: '',
           cv: '', // резюме
         }
       },
+      interestedTags: ['social', 'modern ui'], // что интересно (vr / ml / экология)
+      aboutDescription: '', // описание о себе, "хочу сделать мир лучше и тд" 
     }
   ];
 
