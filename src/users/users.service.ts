@@ -154,7 +154,19 @@ export class UsersService {
   ];
   public skillsAndCategories = [
     {
-      category: 'Капитан / Project Manager / Product Owner',
+      category: 'Teamlead',
+      skills: ['Excel', 'Управление командой', 'Презентация', 'CustDev']
+    },
+    {
+      category: 'Project Manager',
+      skills: ['Excel', 'Управление командой', 'Презентация', 'CustDev']
+    },
+    {
+      category: 'Product Owner',
+      skills: ['Excel', 'Управление командой', 'Презентация', 'CustDev']
+    },
+    {
+      category: 'Капитан',
       skills: ['Excel', 'Управление командой', 'Презентация', 'CustDev']
     },
     {
