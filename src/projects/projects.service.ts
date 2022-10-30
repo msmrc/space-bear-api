@@ -109,7 +109,7 @@ export class ProjectsService {
 			projectTags: ['social', 'modern ui',], // теги проекта
 			projectOwnerId: '1', // основатель проекта
 			existTeam: [{ userId: '1', category: 'Teamlead', skills: ['Excel'] }],
-			lookingForTeam: [{ category: 'Frontend', skills: ['Angular'] }],
+			lookingForTeam: [{ category: 'Frontend', skills: ['Angular'] }, { category: 'Backend', skills: ['C#', 'Node js', 'Nest js'] }, { category: 'Frontend', skills: ['React'] }],
 			projectCostByAdmin: [{
 				rate: '', // хорошо / плохо
 				solution: '', // готово к продвижению / нужны доработки
@@ -177,7 +177,7 @@ export class ProjectsService {
 			isPublished: true, // опубликован (доступен всем пользователям)
 			projectTags: ['social', 'modern ui',], // теги проекта
 			projectOwnerId: '2', // основатель проекта
-			existTeam: [{ userId: '2', category: 'Frontend', skills: ['Angular'] }],
+			existTeam: [{ userId: '2', category: 'Frontend', skills: ['Angular'] }, { userId: '3', category: 'Backend', skills: ['C#', 'C++'] }],
 			lookingForTeam: [{ category: 'Frontend', skills: ['Angular'] }],
 			projectCostByAdmin: [{
 				rate: '', // хорошо / плохо
