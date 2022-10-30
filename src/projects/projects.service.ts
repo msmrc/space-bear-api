@@ -9,6 +9,95 @@ export class ProjectsService {
 	constructor() { }
 
 	// ml
+	public tags = [
+		'modern ui',
+		'biotech',
+		'fintech',
+		'ai',
+		'ar/vr',
+		'game',
+		'social',
+		'производство',
+		'машиностроение',
+		'робототехника',
+		'программное обеспечение',
+		'sass',
+		'продажи',
+		'умный дом',
+		'edtech',
+		'foodtech',
+		'mental health',
+		'знакомства и общение',
+		'стартапы',
+	];
+	public skillsAndCategories = [
+		{
+			category: 'Teamlead',
+			skills: ['Excel', 'Управление командой', 'Презентация', 'CustDev']
+		},
+		{
+			category: 'Project Manager',
+			skills: ['Excel', 'Управление командой', 'Презентация', 'CustDev']
+		},
+		{
+			category: 'Product Owner',
+			skills: ['Excel', 'Управление командой', 'Презентация', 'CustDev']
+		},
+		{
+			category: 'Капитан',
+			skills: ['Excel', 'Управление командой', 'Презентация', 'CustDev']
+		},
+		{
+			category: 'Backend',
+			skills: ['C++', 'Node js', 'Nest js', 'JavaScript', 'C#', '.net', 'Python', 'TypeScript', 'Математический анализ', 'Java']
+		},
+		{
+			category: 'Frontend',
+			skills: ['Node js', 'JavaScript', 'C#', 'Python', 'TypeScript', 'Angular 2+', 'React js', 'Vue js', 'Java']
+		},
+		{
+			category: 'Mobile',
+			skills: ['Ionic', 'Java']
+		},
+		{
+			category: 'ML',
+			skills: ['Node js', 'JavaScript', 'C#', 'Python', 'TypeScript', 'Математический анализ', 'Java']
+		},
+		{
+			category: 'Design',
+			skills: ['Figma']
+		},
+		{
+			category: 'Marketing',
+			skills: ['SMM', 'SEO', 'Context', 'Target']
+		}
+	]
+
+	async mlGetAllSkillsAndCategories(): Promise<any> {
+		try {
+			return this.skillsAndCategories;
+		} catch (e) {
+			console.warn(e);
+			const error = e.code
+				? ErrorConverter.convertErrorToText(e.code, e.keyPattern, e.keyValue)
+				: 'SERVER_ERROR';
+
+			throw new HttpException(error, HttpStatus.FORBIDDEN);
+		}
+	}
+	async mlGetAllTags(): Promise<any> {
+		try {
+			return this.tags;
+		} catch (e) {
+			console.warn(e);
+			const error = e.code
+				? ErrorConverter.convertErrorToText(e.code, e.keyPattern, e.keyValue)
+				: 'SERVER_ERROR';
+
+			throw new HttpException(error, HttpStatus.FORBIDDEN);
+		}
+	}
+
 	public mockProjects = [
 		{
 			_id: '1',

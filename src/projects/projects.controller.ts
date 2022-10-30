@@ -23,4 +23,16 @@ export class ProjectsController {
 	mlGetById(@Param('id') id: string): any {
 		return this.projectsService.mlGetById(id);
 	}
+
+	@Get('ml-get-all-skills-and-categories')
+	mlGetAllSkillsAndCategories(): any {
+		return this.projectsService.mlGetAllSkillsAndCategories();
+	}
+
+
+	@Get('ml-get-all-tags')
+	mlGetAllTags(): any {
+		return this.projectsService.mlGetAllTags();
+	}
+
 }
