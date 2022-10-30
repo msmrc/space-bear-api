@@ -178,7 +178,7 @@ export class ProjectsService {
 			projectTags: ['social', 'modern ui',], // теги проекта
 			projectOwnerId: '2', // основатель проекта
 			existTeam: [{ userId: '2', category: 'Frontend', skills: ['Angular'] }, { userId: '3', category: 'Backend', skills: ['C#', 'C++'] }],
-			lookingForTeam: [{ category: 'Frontend', skills: ['Angular'] }],
+			lookingForTeam: [{ category: 'Frontend', skills: ['Angular'] }, { category: 'Backend', skills: ['C#', 'C++'] }],
 			projectCostByAdmin: [{
 				rate: '', // хорошо / плохо
 				solution: '', // готово к продвижению / нужны доработки
