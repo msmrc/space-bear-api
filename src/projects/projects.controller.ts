@@ -1,11 +1,15 @@
 /* eslint-disable prettier/prettier */
 import {
+	Body,
 	Controller,
 	Get,
 	Logger,
 	Param,
+	Post,
 } from '@nestjs/common';
+import { CreateProjectInterface } from './dto/create-project.interface';
 import { ProjectsService } from './projects.service';
+import { ProjectsEntityDocument } from './schemes/projects.scheme';
 
 @Controller('api/projects')
 export class ProjectsController {
@@ -13,7 +17,26 @@ export class ProjectsController {
 
 	constructor(private projectsService: ProjectsService) { }
 
-	// FOR ML TESTS
+
+	@Get('get-all-projects')
+	getProjectList() {
+		this.logger.log('Handling getProjectList() request...');
+		return this.projectsService.getProjectList();
+	}
+
+	@Post('create')
+	create(@Body() project: CreateProjectInterface): Promise<any> {
+		this.logger.log('Handling create() request...');
+		return this.projectsService.create(project);
+	}
+
+	@Get('get-project-by-id/:id')
+	getProjectById(@Param('id') id: string): Promise<ProjectsEntityDocument> {
+		this.logger.log('Handling getProjectById() request...');
+		return this.projectsService.getProjectById(id);
+	}
+
+	// START ML 
 	@Get('ml-get-all')
 	mlGetAll(): any {
 		return this.projectsService.mlGetAll();
@@ -33,4 +56,6 @@ export class ProjectsController {
 	mlGetAllTags(): any {
 		return this.projectsService.mlGetAllTags();
 	}
+
+	// END ML
 }
