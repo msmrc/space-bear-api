@@ -24,13 +24,22 @@ export class UserFormsService {
           userId: userDto.userId,
         });
 
+        const userToDB: any = {
+          ...userDto,
+          isDraft: false,
+          isEmailVerified: false,
+          isFormCreated: true,
+          isProfileCreated: true,
+          isPublished: true,
+        }
+
         if (existedUser) {
           const updatedUser = await this.userFormModel
-            .findByIdAndUpdate(existedUser._id, userDto)
+            .findByIdAndUpdate(existedUser._id, userToDB)
             .setOptions({ new: true });
           return updatedUser;
         } else {
-          const createUser = new this.userFormModel(userDto);
+          const createUser = new this.userFormModel(userToDB);
           const createdUser = await createUser.save();
           return createdUser;
         }
