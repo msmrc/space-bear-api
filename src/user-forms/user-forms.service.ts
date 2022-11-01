@@ -90,4 +90,40 @@ export class UserFormsService {
     }
   }
 
+  // ML START
+
+  async getMLUserList(): Promise<UserFormEntityDocument[]> {
+    try {
+      const users = await this.userFormModel
+        .find({})
+        .exec();
+      return users;
+    } catch (e) {
+      console.warn(e);
+      const error = e.code
+        ? ErrorConverter.convertErrorToText(e.code, e.keyPattern, e.keyValue)
+        : 'SERVER_ERROR';
+
+      throw new HttpException(error, HttpStatus.FORBIDDEN);
+    }
+  }
+
+  async getMLUserById(userId): Promise<UserFormEntityDocument> {
+    try {
+      const user = await this.userFormModel.findOne({
+        userId: userId,
+      });
+
+      return user;
+    } catch (e) {
+      console.warn(e);
+      const error = e.code
+        ? ErrorConverter.convertErrorToText(e.code, e.keyPattern, e.keyValue)
+        : 'SERVER_ERROR';
+
+      throw new HttpException(error, HttpStatus.FORBIDDEN);
+    }
+  }
+
+  // ML END
 }

@@ -40,6 +40,24 @@ export class UserFormsController {
     return this.userService.getUserByUserId(id);
   }
 
+
+  // ML START
+
+  @Get('ml-get-all-users')
+  getMLUserList() {
+    this.logger.log('Handling getMLUserList() request...');
+    return this.userService.getMLUserList();
+  }
+
+  @Get('ml-get-user-by-id/:id')
+  getMLUserById(@Param('id') id: string): Promise<UserFormEntityDocument> {
+    this.logger.log('Handling getMLUserById() request...');
+    return this.userService.getMLUserById(id);
+  }
+
+  // ML END
+
+
   @Post('upload-avatar')
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(@UploadedFile() file: any): Promise<any> {
