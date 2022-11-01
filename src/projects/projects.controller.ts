@@ -29,10 +29,8 @@ export class ProjectsController {
 		return this.projectsService.mlGetAllSkillsAndCategories();
 	}
 
-
 	@Get('ml-get-all-tags')
 	mlGetAllTags(): any {
 		return this.projectsService.mlGetAllTags();
 	}
-
 }

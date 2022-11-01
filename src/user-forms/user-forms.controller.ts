@@ -6,10 +6,8 @@ import {
   Logger,
   Param,
   Post,
-  Req,
   Res,
   UploadedFile,
-  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { UserFormsService } from './user-forms.service';
@@ -25,8 +23,8 @@ export class UserFormsController {
   constructor(private userService: UserFormsService) { }
 
   @Get('get-all-users')
-  getNewTop() {
-    this.logger.log('Handling getNewTop() request...');
+  getUserList() {
+    this.logger.log('Handling getUserList() request...');
     return this.userService.getUserList();
   }
 
@@ -38,7 +36,7 @@ export class UserFormsController {
 
   @Get('get-user-by-id/:id')
   getUserById(@Param('id') id: string): Promise<UserFormEntityDocument> {
-    this.logger.log('Handling getUserId() request...');
+    this.logger.log('Handling getUserByUserId() request...');
     return this.userService.getUserByUserId(id);
   }
 

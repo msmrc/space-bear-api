@@ -20,10 +20,21 @@ export class UserFormsService {
   async create(userDto: FillProfileMinimumDTOInterface): Promise<UserFormEntityDocument> {
     try {
       if (userDto.userId) {
-        const createUser = new this.userFormModel(userDto);
-        const createdUser = await createUser.save();
+        const existedUser = await this.userFormModel.findOne({
+          userId: userDto.userId,
+        });
 
-        return createdUser;
+        if (existedUser) {
+          const updatedUser = await this.userFormModel
+            .findByIdAndUpdate(existedUser._id, userDto)
+            .setOptions({ new: true });
+          return updatedUser;
+        } else {
+          const createUser = new this.userFormModel(userDto);
+          const createdUser = await createUser.save();
+          return createdUser;
+        }
+
       } else {
         throw new Error()
       }
