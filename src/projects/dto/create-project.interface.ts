@@ -17,16 +17,16 @@ export interface CreateProjectInterface {
 	isInnovated: boolean; // идея инновационная? да / нет
 
 	innovator: { // академия инноваторов
-		projectLink: '', // ссылка на проект, если есть
-		presentationFileId: '', // id на файл с презентацией
-		supportExperience: ['accelerator', 'grants'], // опыт в мерах поддержки (гранты, инкубаторы и тд)
+		projectLink: string; // ссылка на проект, если есть
+		presentationFileId: string; // id на файл с презентацией
+		supportExperience: string[]; // опыт в мерах поддержки (гранты, инкубаторы и тд)
 	},
-	hackathon: any// потребуется для масштабирования (тип проекта)
-	novatorOfMoscow: any // потребуется  для масштабирования (тип проекта)
+	hackathon: any; // потребуется для масштабирования (тип проекта)
+	novatorOfMoscow: any; // потребуется  для масштабирования (тип проекта)
 	// Социальные элементы
 	views: number; // просмотры
 	rate: RateInterface[]; // рейтинг
-	comments: CommentaryInterface[] // комментарии
+	comments: CommentaryInterface[]; // комментарии
 }
 
 export interface CostByAdminInterface {
