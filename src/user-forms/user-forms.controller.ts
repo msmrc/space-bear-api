@@ -15,12 +15,32 @@ import {
 import { UserFormsService } from './user-forms.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import * as EasyYandexS3 from 'easy-yandex-s3';
+import { FillProfileMinimumDTOInterface } from './dto/fill-profile-minimum-dto.interface';
+import { UserFormEntityDocument } from './schemes/user-forms.scheme';
 
-@Controller('api/user-forms')
+@Controller('api/users')
 export class UserFormsController {
   private readonly logger = new Logger(UserFormsController.name);
 
   constructor(private userService: UserFormsService) { }
+
+  @Get('get-all-users')
+  getNewTop() {
+    this.logger.log('Handling getNewTop() request...');
+    return this.userService.getUserList();
+  }
+
+  @Post('create')
+  create(@Body() user: FillProfileMinimumDTOInterface): Promise<any> {
+    this.logger.log('Handling create() request...');
+    return this.userService.create(user);
+  }
+
+  @Get('get-user-by-id/:id')
+  getUserById(@Param('id') id: string): Promise<UserFormEntityDocument> {
+    this.logger.log('Handling getUserId() request...');
+    return this.userService.getUserByUserId(id);
+  }
 
   @Post('upload-avatar')
   @UseInterceptors(FileInterceptor('file'))

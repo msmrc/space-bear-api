@@ -35,13 +35,10 @@ export class UserFormEntity {
   @Prop({ default: false })
   isDraft: boolean;
 
-  @Prop({ default: false })
-  isPromoted: boolean;
+  @Prop({ default: 0 })
+  viewCounter: number;
 
   // =========================== Профиль ====================================
-  // Base section
-  @Prop()
-  avatar: string;
 
   @Prop()
   firstName: string;
@@ -49,55 +46,43 @@ export class UserFormEntity {
   @Prop()
   secondName: string;
 
-  // TODO: Add constants (male, female etc)
   @Prop()
-  profileGender: string;
-
-  @Prop()
-  profileDateBirthday: Date;
-
-  @Prop({ default: 0 })
-  viewCounter: number;
-
-  @Prop({ default: 0 })
-  contactsGetCounter: number;
+  lastName: string;
 
   @Prop()
-  profileBasicDescription: string;
+  birthDate: string;
 
   @Prop()
-  profileExpiriense: string;
+  country: string;
 
   @Prop()
-  professionalDescription: string;
+  city: string;
 
   @Prop()
-  professionalLink: string;
+  citizenship: string;
 
   @Prop()
-  professionalLinkName: string;
+  gender: string;
 
-  // =========================== Анкета ====================================
+  @Prop({
+    type: [
+      {
+        category: { type: String },
+        skills: { type: [String] },
+        experience: { type: String }
+      }
+    ]
+  })
+  skillInformation: { category: string; skills: string[]; experience: string }[];
 
-  // Looking for (что ищет) (знакомства/стартап/хакатон)
-  // TODO: add constants (ENUM)
   @Prop()
-  lookingCategory: string[];
+  interestedTags: string[];
 
   @Prop()
-  lookingDescription: string;
+  experience: string;
 
-
-  // TODO: add constants (ENUM) Junior, intern, senior, middle
   @Prop()
-  lookingExpiriense: string[];
-
-  // Ссылка на контакт пользователя
-  @Prop()
-  readonly contactLink: string;
-  // Описание Контакта пользователя (это телеграм, почта или что-то другое)
-  @Prop()
-  readonly contactLinkDescription: string;
+  aboutDescription: string;
 }
 
 export const UserFormScheme = SchemaFactory.createForClass(UserFormEntity);

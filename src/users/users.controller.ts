@@ -14,7 +14,7 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { UserEntity } from './user.scheme';
 import { UsersService } from './users.service';
 
-@Controller('api/users')
+@Controller('api/user-profiles')
 export class UsersController {
   private readonly logger = new Logger(UsersController.name);
 
