@@ -36,10 +36,10 @@ export class ProjectsController {
 		return this.projectsService.getProjectById(id);
 	}
 
-	@Get('get-projects-by-owner-id/:id')
-	getProjectsByOwnerId(@Param('id') id: string): Promise<ProjectsEntityDocument[]> {
-		this.logger.log('Handling getProjectByOwnerId() request...');
-		return this.projectsService.getProjectsByOwnerId(id);
+	@Get('get-projects-by-member-id/:id')
+	getProjectsByMemberId(@Param('id') id: string): Promise<ProjectsEntityDocument[]> {
+		this.logger.log('Handling getProjectsByMemberId() request...');
+		return this.projectsService.getProjectsByMemberId(id);
 	}
 
 	// START ML 

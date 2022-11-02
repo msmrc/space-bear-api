@@ -74,7 +74,7 @@ export class ProjectsService {
 		}
 	}
 
-	async getProjectsByOwnerId(ownerId): Promise<ProjectsEntityDocument[]> {
+	async getProjectsByMemberId(ownerId): Promise<ProjectsEntityDocument[]> {
 		try {
 			const projects = await this.projectsModel.find({ "existTeam.userId": ownerId }).exec();
 			return projects;
