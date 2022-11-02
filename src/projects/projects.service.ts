@@ -74,6 +74,20 @@ export class ProjectsService {
 		}
 	}
 
+	async getProjectsByOwnerId(ownerId): Promise<ProjectsEntityDocument[]> {
+		try {
+			const projects = await this.projectsModel.find({ "existTeam.userId": ownerId }).exec();
+			return projects;
+		} catch (e) {
+			console.warn(e);
+			const error = e.code
+				? ErrorConverter.convertErrorToText(e.code, e.keyPattern, e.keyValue)
+				: 'SERVER_ERROR';
+
+			throw new HttpException(error, HttpStatus.FORBIDDEN);
+		}
+	}
+
 	// ml 
 	// TODO:: replace it to another controller / table etc
 	public tags = [
