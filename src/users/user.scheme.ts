@@ -21,9 +21,6 @@ export class UserEntity {
   @Prop({ required: true })
   passwordHash: string;
 
-  @Prop({ unique: true })
-  phone: string;
-
   @Prop({ default: false })
   isRemoved: boolean;
 }
