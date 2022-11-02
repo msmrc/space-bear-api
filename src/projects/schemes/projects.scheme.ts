@@ -38,7 +38,7 @@ export class ProjectsEntity {
   @Prop({
     type: [
       {
-        userId: {
+        fullProfileId: {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'UserFormEntity',
         },
@@ -47,7 +47,7 @@ export class ProjectsEntity {
       }
     ]
   })
-  existTeam: { userId: UserFormEntity; skills: string[]; category: string }[];
+  existTeam: { fullProfileId: UserFormEntity; skills: string[]; category: string }[];
 
   @Prop({
     type: [
@@ -63,7 +63,7 @@ export class ProjectsEntity {
   @Prop({
     type: [
       {
-        userId: {
+        fullProfileId: {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'UserFormEntity',
         },
@@ -72,13 +72,13 @@ export class ProjectsEntity {
       }
     ]
   })
-  incomingTeam: { userId: UserFormEntity; skills: string[]; category: string }[];
+  incomingTeam: { fullProfileId: UserFormEntity; skills: string[]; category: string }[];
 
 
   @Prop({
     type: [
       {
-        userId: {
+        fullProfileId: {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'UserFormEntity',
         },
@@ -87,7 +87,7 @@ export class ProjectsEntity {
       }
     ]
   })
-  outgoingTeam: { userId: UserFormEntity; skills: string[]; category: string }[];
+  outgoingTeam: { fullProfileId: UserFormEntity; skills: string[]; category: string }[];
 
   @Prop({
     type: [
@@ -121,7 +121,7 @@ export class ProjectsEntity {
   @Prop({
     type: [
       {
-        userId: {
+        fullProfileId: {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'UserFormEntity',
         },
@@ -129,12 +129,12 @@ export class ProjectsEntity {
       }
     ]
   })
-  rate: { userId: UserFormEntity; count: number; }[];
+  rate: { fullProfileId: UserFormEntity; count: number; }[];
 
   @Prop({
     type: [
       {
-        userId: {
+        fullProfileId: {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'UserFormEntity',
         },
@@ -142,6 +142,6 @@ export class ProjectsEntity {
       }
     ]
   })
-  comments: { userId: UserFormEntity; comment: string; }[];
+  comments: { fullProfileId: UserFormEntity; comment: string; }[];
 }
 export const ProjectsScheme = SchemaFactory.createForClass(ProjectsEntity);

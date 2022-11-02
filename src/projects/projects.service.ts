@@ -23,7 +23,7 @@ export class ProjectsService {
 				const rates = existedProject.rate;
 				rates.push({
 					count: rate.count,
-					userId: rate.userId
+					fullProfileId: rate.fullProfileId
 				});
 
 				const projectToDB: any = {
@@ -57,7 +57,7 @@ export class ProjectsService {
 				const comments = existedProject.comments;
 				comments.push({
 					comment: comment.comment,
-					userId: comment.userId
+					fullProfileId: comment.fullProfileId
 				});
 
 				const projectToDB: any = {
@@ -132,11 +132,11 @@ export class ProjectsService {
 		try {
 			const project = await this.projectsModel
 				.findById(projectId)
-				.populate('existTeam.userId')
-				.populate('incomingTeam.userId')
-				.populate('outgoingTeam.userId')
-				.populate('rate.userId')
-				.populate('comments.userId')
+				.populate('existTeam.fullProfileId')
+				.populate('incomingTeam.fullProfileId')
+				.populate('outgoingTeam.fullProfileId')
+				.populate('rate.fullProfileId')
+				.populate('comments.fullProfileId')
 				.exec();
 
 			const updatedCounter = +project.views + 1;
@@ -160,7 +160,7 @@ export class ProjectsService {
 
 	async getProjectsByMemberId(ownerId): Promise<ProjectsEntityDocument[]> {
 		try {
-			const projects = await this.projectsModel.find({ "existTeam.userId": ownerId }).exec();
+			const projects = await this.projectsModel.find({ "existTeam.fullProfileId": ownerId }).exec();
 			return projects;
 		} catch (e) {
 			console.warn(e);

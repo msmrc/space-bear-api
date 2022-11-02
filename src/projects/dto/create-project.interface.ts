@@ -36,29 +36,29 @@ export interface CostByAdminInterface {
 }
 
 export interface CommentaryInterface {
-	userId: string;
+	fullProfileId: string;
 	comment: string;
 }
 
 export interface RateInterface {
-	userId: any;
+	fullProfileId: any;
 	count: number;
 }
 
 export interface MemberInterface {
-	userId?: string;
+	fullProfileId?: string;
 	category: string;
 	skills: string[];
 }
 
 export interface CommentInterface {
-	userId: any;
+	fullProfileId: any;
 	projectId: string;
 	comment: string;
 }
 
 export interface RateInterface {
-	userId: any;
+	fullProfileId: any;
 	projectId: string;
 	count: number;
 }
