@@ -14,11 +14,10 @@ export type ProjectsEntityDocument = ProjectsEntity & Document;
 export class ProjectsEntity {
   @Prop({
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'UserEntity',
+    ref: 'UserFormEntity',
     required: true,
-    unique: true,
   })
-  projectOwnerId: UserEntity;
+  projectOwnerId: UserFormEntity;
 
   @Prop()
   type: string;
