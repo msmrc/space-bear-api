@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { ErrorConverter } from 'src/common/tools/error-converter';
-import { CreateProjectInterface } from './dto/create-project.interface';
+import { CommentInterface, CreateProjectInterface, RateInterface } from './dto/create-project.interface';
 import { ProjectsEntity, ProjectsEntityDocument } from './schemes/projects.scheme';
 
 @Injectable()
@@ -14,6 +14,74 @@ export class ProjectsService {
 		@InjectModel(ProjectsEntity.name)
 		private projectsModel: Model<ProjectsEntityDocument>,
 	) { }
+
+	async updateRate(rate: RateInterface): Promise<ProjectsEntityDocument> {
+		try {
+			const existedProject = await this.projectsModel.findById(rate.projectId).exec();
+
+			if (existedProject) {
+				const rates = existedProject.rate;
+				rates.push({
+					count: rate.count,
+					userId: rate.userId
+				});
+
+				const projectToDB: any = {
+					...existedProject,
+					comments: rates
+				};
+
+				const updatedProject = await this.projectsModel
+					.findByIdAndUpdate(existedProject._id, projectToDB)
+					.setOptions({ new: true });
+				return updatedProject;
+			} else {
+				throw new Error();
+			}
+		} catch (e) {
+			console.warn(e);
+			const error = e.code
+				? ErrorConverter.convertErrorToText(e.code, e.keyPattern, e.keyValue)
+				: 'SERVER_ERROR';
+
+			throw new HttpException(error, HttpStatus.FORBIDDEN);
+		}
+	}
+
+	async comment(comment: CommentInterface): Promise<ProjectsEntityDocument> {
+		try {
+			const existedProject = await this.projectsModel.findById(comment.projectId).exec();
+
+			if (existedProject) {
+
+				const comments = existedProject.comments;
+				comments.push({
+					comment: comment.comment,
+					userId: comment.userId
+				});
+
+				const projectToDB: any = {
+					...existedProject,
+					comments: comments
+				};
+
+				const updatedProject = await this.projectsModel
+					.findByIdAndUpdate(existedProject._id, projectToDB)
+					.setOptions({ new: true });
+
+				return updatedProject;
+			} else {
+				throw new Error();
+			}
+		} catch (e) {
+			console.warn(e);
+			const error = e.code
+				? ErrorConverter.convertErrorToText(e.code, e.keyPattern, e.keyValue)
+				: 'SERVER_ERROR';
+
+			throw new HttpException(error, HttpStatus.FORBIDDEN);
+		}
+	}
 
 	async create(projectDto: CreateProjectInterface): Promise<ProjectsEntityDocument> {
 		try {
@@ -62,7 +130,23 @@ export class ProjectsService {
 
 	async getProjectById(projectId): Promise<ProjectsEntityDocument> {
 		try {
-			const project = await this.projectsModel.findById(projectId).exec();
+			const project = await this.projectsModel
+				.findById(projectId)
+				.populate('existTeam.userId')
+				.populate('incomingTeam.userId')
+				.populate('outgoingTeam.userId')
+				.populate('rate.userId')
+				.populate('comments.userId')
+				.exec();
+
+			const updatedCounter = +project.views + 1;
+
+			await this.projectsModel
+				.findByIdAndUpdate(projectId, {
+					views: updatedCounter,
+				})
+				.setOptions({ new: true });
+
 			return project;
 		} catch (e) {
 			console.warn(e);
@@ -101,6 +185,7 @@ export class ProjectsService {
 		'производство',
 		'машиностроение',
 		'робототехника',
+		'искусственный интеллект',
 		'программное обеспечение',
 		'sass',
 		'продажи',

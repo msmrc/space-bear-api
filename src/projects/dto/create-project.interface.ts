@@ -41,7 +41,7 @@ export interface CommentaryInterface {
 }
 
 export interface RateInterface {
-	userId: string;
+	userId: any;
 	count: number;
 }
 
@@ -49,4 +49,16 @@ export interface MemberInterface {
 	userId?: string;
 	category: string;
 	skills: string[];
+}
+
+export interface CommentInterface {
+	userId: any;
+	projectId: string;
+	comment: string;
+}
+
+export interface RateInterface {
+	userId: any;
+	projectId: string;
+	count: number;
 }

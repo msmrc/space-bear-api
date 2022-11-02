@@ -7,7 +7,7 @@ import {
 	Param,
 	Post,
 } from '@nestjs/common';
-import { CreateProjectInterface } from './dto/create-project.interface';
+import { CommentInterface, CreateProjectInterface, RateInterface } from './dto/create-project.interface';
 import { ProjectsService } from './projects.service';
 import { ProjectsEntityDocument } from './schemes/projects.scheme';
 
@@ -17,6 +17,17 @@ export class ProjectsController {
 
 	constructor(private projectsService: ProjectsService) { }
 
+	@Post('comment')
+	comment(@Body() comment: CommentInterface): Promise<any> {
+		this.logger.log('Handling comment() request...');
+		return this.projectsService.comment(comment);
+	}
+
+	@Post('update-rate')
+	updateRate(@Body() rate: RateInterface): Promise<any> {
+		this.logger.log('Handling updateRate() request...');
+		return this.projectsService.updateRate(rate);
+	}
 
 	@Get('get-all-projects')
 	getProjectList() {

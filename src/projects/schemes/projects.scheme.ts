@@ -4,6 +4,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import { UserEntity } from 'src/users/user.scheme';
 import * as mongoose from 'mongoose';
+import { UserFormEntity } from 'src/user-forms/schemes/user-forms.scheme';
 
 export type ProjectsEntityDocument = ProjectsEntity & Document;
 
@@ -37,13 +38,16 @@ export class ProjectsEntity {
   @Prop({
     type: [
       {
-        userId: { type: String },
+        userId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'UserFormEntity',
+        },
         category: { type: String },
         skills: { type: [String] },
       }
     ]
   })
-  existTeam: { userId: string; skills: string[]; category: string }[];
+  existTeam: { userId: UserFormEntity; skills: string[]; category: string }[];
 
   @Prop({
     type: [
@@ -59,25 +63,31 @@ export class ProjectsEntity {
   @Prop({
     type: [
       {
-        userId: { type: String },
+        userId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'UserFormEntity',
+        },
         category: { type: String },
         skills: { type: [String] },
       }
     ]
   })
-  incomingTeam: { userId: string; skills: string[]; category: string }[];
+  incomingTeam: { userId: UserFormEntity; skills: string[]; category: string }[];
 
 
   @Prop({
     type: [
       {
-        userId: { type: String },
+        userId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'UserFormEntity',
+        },
         category: { type: String },
         skills: { type: [String] },
       }
     ]
   })
-  outgoingTeam: { userId: string; skills: string[]; category: string }[];
+  outgoingTeam: { userId: UserFormEntity; skills: string[]; category: string }[];
 
   @Prop({
     type: [
@@ -111,21 +121,27 @@ export class ProjectsEntity {
   @Prop({
     type: [
       {
-        userId: { type: String },
+        userId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'UserFormEntity',
+        },
         count: { type: Number },
       }
     ]
   })
-  rate: { userId: string; count: number; }[];
+  rate: { userId: UserFormEntity; count: number; }[];
 
   @Prop({
     type: [
       {
-        userId: { type: String },
+        userId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'UserFormEntity',
+        },
         comment: { type: String },
       }
     ]
   })
-  comments: { userId: string; comment: string; }[];
+  comments: { userId: UserFormEntity; comment: string; }[];
 }
 export const ProjectsScheme = SchemaFactory.createForClass(ProjectsEntity);
