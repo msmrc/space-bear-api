@@ -1,5 +1,4 @@
 /* eslint-disable prettier/prettier */
-import { HttpService } from '@nestjs/axios';
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
@@ -13,23 +12,8 @@ export class ProjectsService {
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	constructor(
 		@InjectModel(ProjectsEntity.name)
-		private projectsModel: Model<ProjectsEntityDocument>,
-		private readonly httpService: HttpService
+		private projectsModel: Model<ProjectsEntityDocument>
 	) { }
-
-	async getProjectsForMe(userId): Promise<any> {
-		try {
-			const result = this.httpService.get(`http://194.67.67.70/search_projects_for_specialist/${userId}`);
-			return result;
-		} catch (e) {
-			console.warn(e);
-			const error = e.code
-				? ErrorConverter.convertErrorToText(e.code, e.keyPattern, e.keyValue)
-				: 'SERVER_ERROR';
-
-			throw new HttpException(error, HttpStatus.FORBIDDEN);
-		}
-	}
 
 	async updateRate(rate: RateInterface): Promise<ProjectsEntityDocument> {
 		try {
