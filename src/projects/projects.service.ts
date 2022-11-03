@@ -4,9 +4,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { ErrorConverter } from 'src/common/tools/error-converter';
-import { CommentInterface, CreateProjectInterface, RateInterface } from './dto/create-project.interface';
+import { AcceptToTeamInterface, CommentInterface, CreateProjectInterface, OutgoingTeamInterface, RateInterface } from './dto/create-project.interface';
 import { ProjectsEntity, ProjectsEntityDocument } from './schemes/projects.scheme';
-
+import { IncomeToTeamInterface } from './dto/create-project.interface';
 @Injectable()
 export class ProjectsService {
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -14,6 +14,130 @@ export class ProjectsService {
 		@InjectModel(ProjectsEntity.name)
 		private projectsModel: Model<ProjectsEntityDocument>
 	) { }
+
+	async acceptToTeam(accept: AcceptToTeamInterface): Promise<ProjectsEntityDocument> {
+		try {
+			const existedProject = await this.projectsModel.findById(accept.projectId).exec();
+
+			if (existedProject) {
+				const existingTeam = existedProject.existTeam;
+				existingTeam.push({
+					fullProfileId: accept.fullProfileId,
+					category: accept.category,
+					skills: accept.skills
+				});
+
+				if (accept.type === 'income') {
+					const incomingTeam = existedProject.incomingTeam.filter(x => x.fullProfileId !== accept.fullProfileId);
+					// удаляем из списка и записываем в existing team
+
+					const projectToDB: any = {
+						...existedProject,
+						incomingTeam: incomingTeam,
+						existTeam: existingTeam
+					};
+
+					const updatedProject = await this.projectsModel
+						.findByIdAndUpdate(existedProject._id, projectToDB)
+						.setOptions({ new: true });
+					return updatedProject;
+				}
+
+				if (accept.type === 'outgoing') {
+					const outgoingTeam = existedProject.outgoingTeam.filter(x => x.fullProfileId !== accept.fullProfileId);
+					// удаляем из списка и записываем в existing team
+
+					const projectToDB: any = {
+						...existedProject,
+						outgoingTeam: outgoingTeam,
+						existTeam: existingTeam
+					};
+
+					const updatedProject = await this.projectsModel
+						.findByIdAndUpdate(existedProject._id, projectToDB)
+						.setOptions({ new: true });
+					return updatedProject;
+				}
+			} else {
+				throw new Error();
+			}
+		} catch (e) {
+			console.warn(e);
+			const error = e.code
+				? ErrorConverter.convertErrorToText(e.code, e.keyPattern, e.keyValue)
+				: 'SERVER_ERROR';
+
+			throw new HttpException(error, HttpStatus.FORBIDDEN);
+		}
+	}
+
+	async outgoingToTeam(outgoing: OutgoingTeamInterface): Promise<ProjectsEntityDocument> {
+		try {
+			const existedProject = await this.projectsModel.findById(outgoing.projectId).exec();
+
+			if (existedProject) {
+				const outgoingTeam = existedProject.outgoingTeam;
+				outgoingTeam.push({
+					fullProfileId: outgoing.fullProfileId,
+					category: outgoing.category,
+					skills: outgoing.skills
+				});
+
+				const projectToDB: any = {
+					...existedProject,
+					outgoingTeam: outgoingTeam
+				};
+
+				const updatedProject = await this.projectsModel
+					.findByIdAndUpdate(existedProject._id, projectToDB)
+					.setOptions({ new: true });
+				return updatedProject;
+			} else {
+				throw new Error();
+			}
+		} catch (e) {
+			console.warn(e);
+			const error = e.code
+				? ErrorConverter.convertErrorToText(e.code, e.keyPattern, e.keyValue)
+				: 'SERVER_ERROR';
+
+			throw new HttpException(error, HttpStatus.FORBIDDEN);
+		}
+	}
+
+	async incomeToTeam(income: IncomeToTeamInterface): Promise<ProjectsEntityDocument> {
+		try {
+			const existedProject = await this.projectsModel.findById(income.projectId).exec();
+
+			if (existedProject) {
+				const incomingTeam = existedProject.incomingTeam;
+				incomingTeam.push({
+					fullProfileId: income.fullProfileId,
+					category: income.category,
+					skills: income.skills
+				});
+
+				const projectToDB: any = {
+					...existedProject,
+					income: incomingTeam
+				};
+
+				const updatedProject = await this.projectsModel
+					.findByIdAndUpdate(existedProject._id, projectToDB)
+					.setOptions({ new: true });
+				return updatedProject;
+			} else {
+				throw new Error();
+			}
+		} catch (e) {
+			console.warn(e);
+			const error = e.code
+				? ErrorConverter.convertErrorToText(e.code, e.keyPattern, e.keyValue)
+				: 'SERVER_ERROR';
+
+			throw new HttpException(error, HttpStatus.FORBIDDEN);
+		}
+	}
 
 	async updateRate(rate: RateInterface): Promise<ProjectsEntityDocument> {
 		try {

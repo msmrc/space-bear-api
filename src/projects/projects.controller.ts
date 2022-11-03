@@ -7,7 +7,7 @@ import {
 	Param,
 	Post,
 } from '@nestjs/common';
-import { CommentInterface, CreateProjectInterface, RateInterface } from './dto/create-project.interface';
+import { AcceptToTeamInterface, CommentInterface, CreateProjectInterface, IncomeToTeamInterface, OutgoingTeamInterface, RateInterface } from './dto/create-project.interface';
 import { ProjectsService } from './projects.service';
 import { ProjectsEntityDocument } from './schemes/projects.scheme';
 
@@ -16,6 +16,24 @@ export class ProjectsController {
 	private readonly logger = new Logger(ProjectsController.name);
 
 	constructor(private projectsService: ProjectsService) { }
+
+	@Post('accept-to-team')
+	acceptToTeam(@Body() income: AcceptToTeamInterface): Promise<any> {
+		this.logger.log('Handling acceptToTeam() request...');
+		return this.projectsService.acceptToTeam(income);
+	}
+
+	@Post('outgoing-to-team')
+	outgoingToTeam(@Body() income: OutgoingTeamInterface): Promise<any> {
+		this.logger.log('Handling outgoingToTeam() request...');
+		return this.projectsService.outgoingToTeam(income);
+	}
+
+	@Post('income-to-team')
+	incomeToTeam(@Body() income: IncomeToTeamInterface): Promise<any> {
+		this.logger.log('Handling incomeToTeam() request...');
+		return this.projectsService.incomeToTeam(income);
+	}
 
 	@Post('comment')
 	comment(@Body() comment: CommentInterface): Promise<any> {

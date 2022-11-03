@@ -62,3 +62,23 @@ export interface RateInterface {
 	projectId: string;
 	count: number;
 }
+
+export interface IncomeToTeamInterface {
+	fullProfileId: any;
+	projectId: string;
+	category: string;
+	skills: string[];
+}
+export interface OutgoingTeamInterface {
+	fullProfileId: any;
+	projectId: string;
+	category: string;
+	skills: string[];
+}
+export interface AcceptToTeamInterface {
+	type: string; // outgoing / income
+	fullProfileId: any;
+	projectId: string;
+	category: string;
+	skills: string[];
+}
