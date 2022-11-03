@@ -116,6 +116,7 @@ export class ProjectsService {
 		try {
 			const projects = await this.projectsModel
 				.find({})
+				.populate('existTeam.fullProfileId')
 				.exec();
 			return projects;
 		} catch (e) {
