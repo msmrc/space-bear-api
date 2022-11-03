@@ -155,10 +155,15 @@ export class ProjectsService {
 
 			if (existedProject) {
 				const rates = existedProject.rate;
-				rates.push({
-					count: rate.count,
-					fullProfileId: rate.fullProfileId
-				});
+				const existUserRate = rates.findIndex((x) => x.fullProfileId === rate.fullProfileId);
+				if (existUserRate > 0) {
+					rates.splice(existUserRate, 1);
+				} else {
+					rates.push({
+						count: rate.count,
+						fullProfileId: rate.fullProfileId
+					});
+				}
 
 				const projectToDB: any = {
 					...existedProject,
