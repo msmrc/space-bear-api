@@ -28,7 +28,7 @@ export class ProjectsService {
 				});
 
 				if (accept.type === 'income') {
-					const incomingTeam = existedProject.incomingTeam.filter(x => x.fullProfileId !== accept.fullProfileId);
+					const incomingTeam = existedProject.incomingTeam.filter((x: any) => x.fullProfileId !== accept.fullProfileId || x.fullProfileId._id !== accept.fullProfileId);
 					// удаляем из списка и записываем в existing team
 
 					const projectToDB: any = {
@@ -44,7 +44,7 @@ export class ProjectsService {
 				}
 
 				if (accept.type === 'outgoing') {
-					const outgoingTeam = existedProject.outgoingTeam.filter(x => x.fullProfileId !== accept.fullProfileId);
+					const outgoingTeam = existedProject.outgoingTeam.filter((x: any) => x.fullProfileId !== accept.fullProfileId || x.fullProfileId._id !== accept.fullProfileId);
 					// удаляем из списка и записываем в existing team
 
 					const projectToDB: any = {
@@ -77,7 +77,7 @@ export class ProjectsService {
 
 			if (existedProject) {
 				const outgoingTeam = existedProject.outgoingTeam;
-				const existUser = outgoingTeam.find((x) => x.fullProfileId === outgoing.fullProfileId);
+				const existUser = outgoingTeam.find((x: any) => x.fullProfileId === outgoing.fullProfileId || x.fullProfileId._id === outgoing.fullProfileId);
 				if (existUser) {
 					throw new Error();
 				}
@@ -116,7 +116,7 @@ export class ProjectsService {
 
 			if (existedProject) {
 				const incomingTeam = existedProject.incomingTeam;
-				const existUser = incomingTeam.find((x) => x.fullProfileId === income.fullProfileId);
+				const existUser = incomingTeam.find((x: any) => x.fullProfileId === income.fullProfileId || x.fullProfileId._id === income.fullProfileId);
 				if (existUser) {
 					throw new Error();
 				}
@@ -155,7 +155,7 @@ export class ProjectsService {
 
 			if (existedProject) {
 				const rates = existedProject.rate;
-				const existUserRate = rates.findIndex((x) => x.fullProfileId === rate.fullProfileId);
+				const existUserRate = rates.findIndex((x: any) => x.fullProfileId === rate.fullProfileId || x.fullProfileId._id === rate.fullProfileId);
 				if (existUserRate > 0) {
 					rates.splice(existUserRate, 1);
 				} else {
