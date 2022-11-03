@@ -17,6 +17,16 @@ export class ProjectsController {
 
 	constructor(private projectsService: ProjectsService) { }
 
+	// with ml for web
+
+	@Get('get-projects-for-me/:id')
+	getProjectsForMe(@Param('id') id: string) {
+		this.logger.log('Handling getProjectsForMe() request...');
+		return this.projectsService.getProjectsForMe(id);
+	}
+
+	// end
+
 	@Post('comment')
 	comment(@Body() comment: CommentInterface): Promise<any> {
 		this.logger.log('Handling comment() request...');
