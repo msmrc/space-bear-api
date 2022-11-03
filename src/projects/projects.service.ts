@@ -77,6 +77,11 @@ export class ProjectsService {
 
 			if (existedProject) {
 				const outgoingTeam = existedProject.outgoingTeam;
+				const existUser = outgoingTeam.find((x) => x.fullProfileId === outgoing.fullProfileId);
+				if (existUser) {
+					throw new Error();
+				}
+
 				outgoingTeam.push({
 					fullProfileId: outgoing.fullProfileId,
 					category: outgoing.category,
@@ -111,6 +116,11 @@ export class ProjectsService {
 
 			if (existedProject) {
 				const incomingTeam = existedProject.incomingTeam;
+				const existUser = incomingTeam.find((x) => x.fullProfileId === income.fullProfileId);
+				if (existUser) {
+					throw new Error();
+				}
+
 				incomingTeam.push({
 					fullProfileId: income.fullProfileId,
 					category: income.category,
