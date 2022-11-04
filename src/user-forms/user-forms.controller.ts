@@ -34,10 +34,18 @@ export class UserFormsController {
     return this.userService.create(user);
   }
 
+
+
   @Get('get-user-by-id/:id')
   getUserById(@Param('id') id: string): Promise<UserFormEntityDocument> {
     this.logger.log('Handling getUserByUserId() request...');
     return this.userService.getUserByUserId(id);
+  }
+
+  @Get('get-user-by-profile-id/:id')
+  getUserByProfileId(@Param('id') id: string): Promise<UserFormEntityDocument> {
+    this.logger.log('Handling getUserByProfileId() request...');
+    return this.userService.getUserByProfileId(id);
   }
 
 

@@ -73,6 +73,21 @@ export class UserFormsService {
     }
   }
 
+  async getUserByProfileId(userId): Promise<UserFormEntityDocument> {
+    try {
+      const user = await this.userFormModel.findById(userId).exec();
+
+      return user;
+    } catch (e) {
+      console.warn(e);
+      const error = e.code
+        ? ErrorConverter.convertErrorToText(e.code, e.keyPattern, e.keyValue)
+        : 'SERVER_ERROR';
+
+      throw new HttpException(error, HttpStatus.FORBIDDEN);
+    }
+  }
+
   async getUserByUserId(userId): Promise<UserFormEntityDocument> {
     try {
       const user = await this.userFormModel.findOne({
