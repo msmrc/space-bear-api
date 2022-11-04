@@ -300,7 +300,10 @@ export class ProjectsService {
 
 	async getProjectsByMemberId(ownerId): Promise<ProjectsEntityDocument[]> {
 		try {
-			const projects = await this.projectsModel.find({ "existTeam.fullProfileId": ownerId }).exec();
+			const projects = await this.projectsModel
+				.find({ "existTeam.fullProfileId": ownerId })
+				.populate('existTeam.fullProfileId')
+				.exec();
 			return projects;
 		} catch (e) {
 			console.warn(e);
