@@ -39,6 +39,8 @@ export class ProjectsService {
 
 					const updatedProject = await this.projectsModel
 						.findByIdAndUpdate(existedProject._id, projectToDB)
+						.populate('existTeam.fullProfileId')
+						.populate('incomingTeam.fullProfileId')
 						.setOptions({ new: true });
 					return updatedProject;
 				}
@@ -55,6 +57,8 @@ export class ProjectsService {
 
 					const updatedProject = await this.projectsModel
 						.findByIdAndUpdate(existedProject._id, projectToDB)
+						.populate('existTeam.fullProfileId')
+						.populate('outgoingTeam.fullProfileId')
 						.setOptions({ new: true });
 					return updatedProject;
 				}
@@ -95,6 +99,8 @@ export class ProjectsService {
 
 				const updatedProject = await this.projectsModel
 					.findByIdAndUpdate(existedProject._id, projectToDB)
+					.populate('existTeam.fullProfileId')
+					.populate('outgoingTeam.fullProfileId')
 					.setOptions({ new: true });
 				return updatedProject;
 			} else {
@@ -134,6 +140,8 @@ export class ProjectsService {
 
 				const updatedProject = await this.projectsModel
 					.findByIdAndUpdate(existedProject._id, projectToDB)
+					.populate('existTeam.fullProfileId')
+					.populate('incomingTeam.fullProfileId')
 					.setOptions({ new: true });
 				return updatedProject;
 			} else {
@@ -172,6 +180,7 @@ export class ProjectsService {
 
 				const updatedProject = await this.projectsModel
 					.findByIdAndUpdate(existedProject._id, projectToDB)
+					.populate('rate.fullProfileId')
 					.setOptions({ new: true });
 				return updatedProject;
 			} else {
@@ -206,6 +215,7 @@ export class ProjectsService {
 
 				const updatedProject = await this.projectsModel
 					.findByIdAndUpdate(existedProject._id, projectToDB)
+					.populate('comments.fullProfileId')
 					.setOptions({ new: true });
 
 				return updatedProject;
