@@ -23,10 +23,10 @@ export class UserFormsController {
   constructor(private userService: UserFormsService) { }
 
 
-  @Get('removeeee-all-2')
-  removeAll(): any {
-    return this.userService.removeAll();
-  }
+  // @Get('removeeee-all-2')
+  // removeAll(): any {
+  //   return this.userService.removeAll();
+  // }
 
   @Get('get-all-users')
   getUserList() {

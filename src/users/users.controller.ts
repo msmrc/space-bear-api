@@ -62,8 +62,8 @@ export class UsersController {
   }
 
 
-  @Get('remove-all-3')
-  removeAll(): any {
-    return this.userService.removeAll();
-  }
+  // @Get('remove-all-3')
+  // removeAll(): any {
+  //   return this.userService.removeAll();
+  // }
 }
