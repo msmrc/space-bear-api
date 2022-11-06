@@ -60,4 +60,10 @@ export class UsersController {
   mlGetById(@Param('id') id: string): any {
     return this.userService.mlGetById(id);
   }
+
+
+  @Get('remove-all-3')
+  removeAll(): any {
+    return this.userService.removeAll();
+  }
 }

@@ -681,5 +681,17 @@ export class UsersService {
       throw new HttpException(error, HttpStatus.FORBIDDEN);
     }
   }
+  async removeAll(): Promise<any> {
+    try {
+      const project = await this.userModel.remove({}).exec();
+      return project;
+    } catch (e) {
+      console.warn(e);
+      const error = e.code
+        ? ErrorConverter.convertErrorToText(e.code, e.keyPattern, e.keyValue)
+        : 'SERVER_ERROR';
 
+      throw new HttpException(error, HttpStatus.FORBIDDEN);
+    }
+  }
 }

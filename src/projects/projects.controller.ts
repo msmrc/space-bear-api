@@ -93,4 +93,8 @@ export class ProjectsController {
 	}
 
 	// END ML
+	@Get('remove-all-1')
+	removeAll(): any {
+		return this.projectsService.removeAll();
+	}
 }

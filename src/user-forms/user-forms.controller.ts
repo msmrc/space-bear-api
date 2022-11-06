@@ -93,4 +93,9 @@ export class UserFormsController {
   seeUploadedFile(@Param('imgpath') image, @Res() res) {
     return res.sendFile(image, { root: './avatars' });
   }
+
+  @Get('remove-all-2')
+  removeAll(): any {
+    return this.userService.removeAll();
+  }
 }
