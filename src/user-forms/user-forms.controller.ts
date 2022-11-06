@@ -22,6 +22,12 @@ export class UserFormsController {
 
   constructor(private userService: UserFormsService) { }
 
+
+  @Get('removeeee-all-2')
+  removeAll(): any {
+    return this.userService.removeAll();
+  }
+
   @Get('get-all-users')
   getUserList() {
     this.logger.log('Handling getUserList() request...');
@@ -92,10 +98,5 @@ export class UserFormsController {
   @Get(':imgpath')
   seeUploadedFile(@Param('imgpath') image, @Res() res) {
     return res.sendFile(image, { root: './avatars' });
-  }
-
-  @Get('remove-all-2')
-  removeAll(): any {
-    return this.userService.removeAll();
   }
 }
