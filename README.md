@@ -14,3 +14,5 @@ Space Bear API - бекенд, для WEB сервиса созданного д
 https://disk.yandex.ru/i/BrwAalGz5PA2gA
 
 # Презентация
+
+https://disk.yandex.ru/i/y6KfAW3zwtCHqw
